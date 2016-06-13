@@ -34,8 +34,8 @@
           if(month<=9){
             month = "0"+month
           }
-          from = date.getUTCFullYear()+"-"+(date.getUTCMonth()+1)+"-"+"01";
-          to = date.getUTCFullYear()+"-"+(date.getUTCMonth()+1)+"-"+"31";
+          from = year+"-"+month+"-"+"01";
+          to = year+"-"+month+"-"+"31";
         } else if(searchMode=='period'){
           from = $("#from").val();
           to = $("#to").val();
