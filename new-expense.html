@@ -14,11 +14,11 @@
         <form action="create-expense.html">
           <div class="form-group">
             <label for="exampleInputEmail1">日期</label>
-            <input type="date" class="form-control" name="date">
+            <input id="date" type="date" class="form-control" name="date">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">類別</label>
-            <select class="form-control" name="categoryId">
+            <select id="categoryId" class="form-control" name="categoryId">
               <option value="1">餐飲</option>
               <option value="2">交通</option>
               <option value="3">娛樂</option>
@@ -27,15 +27,31 @@
           </div>
           <div class="form-group">
             <label for="exampleInputFile">項目</label>
-            <input type="text" class="form-control" name="name" placeholder="便當">
+            <input id="name" type="text" class="form-control" name="name" placeholder="便當">
           </div>
           <div class="form-group">
             <label for="exampleInputFile">金額</label>
-            <input type="number" class="form-control" name="amount" placeholder="70">
+            <input id="amount" type="number" class="form-control" name="amount" placeholder="70">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
         </form>
+        <button id="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
+    <script>
+      var ForerunnerDB = require("forerunnerdb");
+      var fdb = new ForerunnerDB();
+      var db = fdb.db("DB");
+      var expensesCollection = db.collection("expenses");
+      expensesCollection.load();
+      $("#submit").on("click",function(){
+        expensesCollection.insert({
+          date:$("#date").val(),
+          categoryId:$("#categoryId").val(),
+          name:$("#name").val(),
+          amount:$("#amount").val()
+        });
+        expensesCollection.save();
+      });
+    </script>
   </body>
 </html>
