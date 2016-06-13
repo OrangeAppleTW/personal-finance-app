@@ -17,6 +17,18 @@
         <br>
         <input id="from" type="date"> ~ <input id="to" type="date">
         <button id="submit" class="btn btn-primary btn-block">查詢</button>
+        <hr>
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>項目</th>
+              <th>金額</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
       </div>
     </div>
     <script>
@@ -32,7 +44,7 @@
           var year = date.getUTCFullYear();
           var month = date.getUTCMonth()+1; // gteMonth 的結果會是實際月份-1
           if(month<=9){
-            month = "0"+month
+            month = "0"+month;
           }
           from = year+"-"+month+"-"+"01";
           to = year+"-"+month+"-"+"31";
@@ -40,6 +52,7 @@
           from = $("#from").val();
           to = $("#to").val();
         }
+        
         var expenses = expensesCollection.find({
           date:{
             $gte:from,
@@ -47,7 +60,9 @@
           } 
         });
         
-        console.log(expenses);
+        for(var i=0;i<expenses.length; i++){
+          $("tbody").append("<tr><td>"+expenses[i].date+"</td><td>"+expenses[i].name+"</td><td>"+expenses[i].amount+"</td></tr>");
+        }
       });
       
     </script>
