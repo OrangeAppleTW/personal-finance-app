@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>支出查詢</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fdb-all.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-12">
+        <h2 style="margin-bottom:20px;text-align:center;">支出查詢</h2>
+        <input type="radio" name="condition" value="thisMonth" /> 本月份
+        <br>
+        <input type="radio" name="condition" value="period" /> 指定期間
+        <br>
+        <input id="from" type="date"> ~ <input id="to" type="date">
+        <button id="submit" class="btn btn-primary btn-block">查詢</button>
+      </div>
+    </div>
+    <script>
+      var fdb = new ForerunnerDB();
+      var db = fdb.db("DB");
+      var expensesCollection = db.collection("expenses");
+      expensesCollection.load();
+      $("#submit").on("click",function(){
+        expensesCollection.insert({
+          date:$("#date").val(),
+          categoryId:$("#categoryId").val(),
+          name:$("#name").val(),
+          amount:$("#amount").val(),
+          timestamp: Date.now()
+        });
+        expensesCollection.save();
+        alert("儲存成功！");
+        date:$("#date").val("");
+        categoryId:$("#categoryId").val("");
+        name:$("#name").val("");
+        amount:$("#amount").val("");
+      });
+      
+    </script>
+  </body>
+</html>
