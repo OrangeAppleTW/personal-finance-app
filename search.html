@@ -11,9 +11,9 @@
     <div class="container">
       <div class="col-md-12">
         <h2 style="margin-bottom:20px;text-align:center;">支出查詢</h2>
-        <input type="radio" name="condition" value="thisMonth" /> 本月份
+        <input type="radio" name="mode" value="thisMonth" /> 本月份
         <br>
-        <input type="radio" name="condition" value="period" /> 指定期間
+        <input type="radio" name="mode" value="period" /> 指定期間
         <br>
         <input id="from" type="date"> ~ <input id="to" type="date">
         <button id="submit" class="btn btn-primary btn-block">查詢</button>
@@ -25,19 +25,24 @@
       var expensesCollection = db.collection("expenses");
       expensesCollection.load();
       $("#submit").on("click",function(){
-        expensesCollection.insert({
-          date:$("#date").val(),
-          categoryId:$("#categoryId").val(),
-          name:$("#name").val(),
-          amount:$("#amount").val(),
-          timestamp: Date.now()
+        var searchMode = $("input[name='mode']:checked").val();
+        var from="", to="";
+        if (searchMode=='thisMonth') {
+          var date = new Date();
+          from = date.getUTCFullYear()+"-"+(date.getUTCMonth()+1)+"-"+"1";
+          to = date.getUTCFullYear()+"-"+(date.getUTCMonth()+1)+"-"+"31";
+        } else if(searchMode=='period'){
+          from = $("#from").val();
+          to = $("#to").val();
+        }
+        var expenses = expensesCollection.find({
+          date:{
+            $gte:from,
+            $lte:to
+          } 
         });
-        expensesCollection.save();
-        alert("儲存成功！");
-        date:$("#date").val("");
-        categoryId:$("#categoryId").val("");
-        name:$("#name").val("");
-        amount:$("#amount").val("");
+        
+        console.log(expenses);
       });
       
     </script>
