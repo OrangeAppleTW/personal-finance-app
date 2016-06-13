@@ -48,7 +48,8 @@
           date:$("#date").val(),
           categoryId:$("#categoryId").val(),
           name:$("#name").val(),
-          amount:$("#amount").val()
+          amount:$("#amount").val(),
+          timestamp: Date.now()
         });
         expensesCollection.save();
         alert("儲存成功！");
