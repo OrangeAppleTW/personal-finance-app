@@ -19,6 +19,7 @@
           <div class="form-group">
             <label for="exampleInputPassword1">類別</label>
             <select id="categoryId" class="form-control" name="categoryId">
+              <option value=""></option>
               <option value="1">餐飲</option>
               <option value="2">交通</option>
               <option value="3">娛樂</option>
@@ -50,7 +51,13 @@
           amount:$("#amount").val()
         });
         expensesCollection.save();
+        alert("儲存成功！");
+        date:$("#date").val("");
+        categoryId:$("#categoryId").val("");
+        name:$("#name").val("");
+        amount:$("#amount").val("");
       });
+      
     </script>
   </body>
 </html>
