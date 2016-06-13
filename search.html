@@ -25,7 +25,18 @@
         <button id="submit" class="btn btn-primary btn-block">查詢</button>
         <hr>
         
-        <table class="table">
+        <table id="categories" class="table">
+          <thead>
+            <tr>
+              <th>類別</th>
+              <th>金額</th>
+              <th>比例</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        
+        <table id="details" class="table">
           <thead>
             <tr>
               <th>日期</th>
@@ -69,10 +80,25 @@
             $orderBy:{date:1}
           }
         );
-        $("tbody").html("");
+        
+        var categories={
+          1: {name:"餐飲",amount:0},
+          2: {name:"交通",amount:0},
+          3: {name:"娛樂",amount:0},
+          4: {name:"生活開銷",amount:0}
+        };
+        var total = 0;
+        
+        $("#details tbody").html("");
         for(var i=0;i<expenses.length; i++){
-          $("tbody").append("<tr><td>"+expenses[i].date+"</td><td>"+expenses[i].name+"</td><td>"+expenses[i].amount+"</td></tr>");
+          $("#details tbody").append("<tr><td>"+expenses[i].date+"</td><td>"+expenses[i].name+"</td><td>"+expenses[i].amount+"</td></tr>");
+          categories[expense[i].categoryId].amount += expense[i].amount;
+          total += expense[i].amount;
         }
+        for(elem in categories){
+          $("#categories").append("<tr><td>"+elem.name+"</td><td>"+elem.amount+"</td><td>"+elem.amount/total*100+"%"+"</td></tr>");
+        }
+        $("#categories").append("<tr><td colspan='3'>總計: "+total+"</td></tr>");
       });
       
     </script>
