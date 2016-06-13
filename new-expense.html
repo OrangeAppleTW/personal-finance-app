@@ -1,4 +1,37 @@
 <html>
-
-
+  <head>
+    <title>Index</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fdb-all.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-12" style="text-align:center;">
+        <img src="images/logo.png" width="160px" style="margin-top:80px;"/>
+        <h2 style="margin-bottom:20px;">新增支出</h2>
+        <form action="create-expense.html">
+          <div class="form-group">
+            <label for="exampleInputEmail1">日期</label>
+            <input type="date" class="form-control" name="date">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">類別</label>
+            <select class="form-control" name="categoryId">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFile">項目</label>
+            <input type="text" class="form-control" name="name" placeholder="便當">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFile">金額</label>
+            <input type="number" class="form-control" name="amount" placeholder="70">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
