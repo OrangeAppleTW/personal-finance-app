@@ -92,8 +92,8 @@
         $("#details tbody").html("");
         for(var i=0;i<expenses.length; i++){
           $("#details tbody").append("<tr><td>"+expenses[i].date+"</td><td>"+expenses[i].name+"</td><td>"+expenses[i].amount+"</td></tr>");
-          categories[expense[i].categoryId].amount += expense[i].amount;
-          total += expense[i].amount;
+          categories[expenses[i].categoryId].amount += expenses[i].amount;
+          total += expenses[i].amount;
         }
         for(elem in categories){
           $("#categories").append("<tr><td>"+elem.name+"</td><td>"+elem.amount+"</td><td>"+elem.amount/total*100+"%"+"</td></tr>");
