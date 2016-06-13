@@ -97,7 +97,7 @@
         }
         for(key in categories){
           var elem = categories[key];
-          $("#categories").append("<tr><td>"+elem.name+"</td><td>"+elem.amount+"</td><td>"+Math.round(elem.amount/total)+"%"+"</td></tr>");
+          $("#categories").append("<tr><td>"+elem.name+"</td><td>"+elem.amount+"</td><td>"+Math.round(elem.amount/total*100)+"%"+"</td></tr>");
         }
         $("#categories").append("<tr><td colspan='3'>總計: "+total+"</td></tr>");
       });
