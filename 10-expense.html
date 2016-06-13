@@ -29,7 +29,13 @@
       var db = fdb.db("DB");
       var expensesCollection = db.collection("expenses");
       expensesCollection.load(function(){
-        var expenses = expensesCollection.find({},{$orderBy:{timestamp:-1}});
+        var expenses = expensesCollection.find(
+          {},
+          {
+            $orderBy:{timestamp:-1},
+            $limit:1
+          }
+        );
         for(var i=0;i<expenses.length; i++){
           $("tbody").append("<tr><td>"+expenses[i].date+"</td><td>"+expenses[i].name+"</td><td>"+expenses[i].amount+"</td></tr>");
         }
